@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Vida em Equilíbrio - Full</title>
+    <style>
+        :root { --primary: #00695c; --bg: #f0f4f3; --white: #ffffff; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        
+        header { background: var(--primary); color: white; padding: 15px; border-radius: 12px; text-align: center; margin-bottom: 20px; }
+
+        /* ÁREA DE BUSCA */
+        .search-section { background: var(--white); padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        #buscaGeral { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1.1rem; box-sizing: border-box; }
+        .instrucao-filtro { font-size: 0.8rem; color: #666; margin-top: 8px; }
+        
+        .lista-wrapper { max-height: 200px; overflow-y: auto; border: 1px solid #eee; margin-top: 10px; background: #fff; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; }
+        td { padding: 12px; border-bottom: 1px solid #eee; cursor: pointer; font-weight: bold; }
+        tr:hover { background: #e0f2f1; }
+        .info-secundaria { font-weight: normal; font-size: 0.8rem; color: #666; float: right; }
+
+        /* KPIs DASHBOARD */
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px; }
+        .kpi-card { background: white; padding: 15px; border-radius: 10px; text-align: center; border-top: 4px solid var(--primary); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .kpi-card h3 { font-size: 0.7rem; color: #666; margin: 0; text-transform: uppercase; }
+        .kpi-card p { font-size: 1.2rem; font-weight: bold; margin: 5px 0 0; color: var(--primary); }
+
+        /* SEÇÕES DE INFORMAÇÃO */
+        .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .section { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        h2 { color: var(--primary); font-size: 1rem; border-bottom: 2px solid #e0f2f1; padding-bottom: 8px; margin-top: 0; }
+        
+        .info-item { margin-bottom: 10px; display: flex; justify-content: space-between; border-bottom: 1px inset #f9f9f9; padding: 4px 0; align-items: center; }
+        .info-item label { color: #7f8c8d; font-size: 0.85rem; }
+        .info-item span { font-weight: 600; font-size: 0.9rem; }
+
+        .badge { padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; background: #eee; min-width: 40px; text-align: center; }
+        .badge-sim { background: #c8e6c9; color: #2e7d32; }
+
+        @media (max-width: 768px) { .detail-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>SISTEMA VIDA EM EQUILÍBRIO</h1>
+        <div id="msg-status">Conectando ao banco de dados...</div>
+    </header>
+
+    <div class="search-section">
+        <input type="text" id="buscaGeral" placeholder="🔍 Busque por Nome, Sexo, Risco ou digite 'PA' para Pressão Alta..." onkeyup="filtrarPacientes()">
+        <p class="instrucao-filtro">Dica: Digite <b>"PA"</b> ou <b>"Alta"</b> para ver apenas pacientes hipertensos.</p>
+        <div class="lista-wrapper">
+            <table>
+                <tbody id="tabelaCorpo"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="kpi-grid">
+        <div class="kpi-card"><h3>Sexo</h3><p id="kpi_sexo">-</p></div>
+        <div class="kpi-card"><h3>Idade</h3><p id="kpi_idade">-</p></div>
+        <div class="kpi-card"><h3>Idade Risco</h3><p id="kpi_id_risco">-</p></div>
+        <div class="kpi-card"><h3>IMC</h3><p id="kpi_imc">-</p></div>
+        <div class="kpi-card"><h3>RCE</h3><p id="kpi_rce">-</p></div>
+        <div class="kpi-card"><h3>RCQ</h3><p id="kpi_rcq">-</p></div>
+        <div class="kpi-card" style="border-top-color: orange;"><h3>Risco</h3><p id="kpi_risco">-</p></div>
+    </div>
+
+    <div class="detail-grid">
+        <div>
+            <div class="section">
+                <h2>Histórico e Medicamentos</h2>
+                <div id="info_historico"></div>
+                <div class="info-item"><label>Medicamentos</label><span id="det_med">-</span></div>
+                <div class="info-item"><label>Uso Contínuo</label><span id="det_cont">-</span></div>
+            </div>
+            <div class="section">
+                <h2>Exame Físico</h2>
+                <div class="info-item"><label>PA (mmHg)</label><span id="det_pa">-</span></div>
+                <div class="info-item"><label>FC (bpm)</label><span id="det_fc">-</span></div>
+                <div class="info-item"><label>Peso / Altura</label><span><span id="det_peso">-</span>kg / <span id="det_est">-</span>cm</span></div>
+                <div class="info-item"><label>Cintura / Quadril</label><span><span id="det_cin">-</span> / <span id="det_qua">-</span></span></div>
+            </div>
+        </div>
+
+        <div>
+            <div class="section">
+                <h2>Critérios Cardiovascular</h2>
+                <div id="info_riscos_rc"></div>
+            </div>
+            <div class="section">
+                <h2>Conduta e Classificação</h2>
+                <div id="info_conduta"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwk8pLENcjccMv_hIlAJB5jxUWw4elgPPwSZlP3VPV5-V22vGBuOAbzORQa15HvvkUnaw/exec";
+    let basePacientes = [];
+
+    async function carregarDados() {
+        try {
+            const response = await fetch(SCRIPT_URL);
+            const data = await response.json();
+            basePacientes = data.slice(1).filter(p => p[0]);
+            renderizarTabela(basePacientes);
+            document.getElementById("msg-status").innerText = `Base conectada: ${basePacientes.length} pacientes`;
+        } catch (e) { 
+            document.getElementById("msg-status").innerText = "Erro ao carregar dados."; 
+        }
+    }
+
+    function renderizarTabela(lista) {
+        const corpo = document.getElementById("tabelaCorpo");
+        corpo.innerHTML = lista.map((p) => `
+            <tr onclick="selecionarPacientePeloNome('${p[0]}')">
+                <td>
+                    👤 ${p[0]} 
+                    <span class="info-secundaria">${p[3]} | PA: ${p[12] || '--'} | Risco: ${p[21] || 'N/A'}</span>
+                </td>
+            </tr>
+        `).join("");
+    }
+
+    function filtrarPacientes() {
+        const termo = document.getElementById("buscaGeral").value.toUpperCase();
+        
+        const filtrados = basePacientes.filter(p => {
+            const nome = p[0] ? p[0].toString().toUpperCase() : "";
+            const sexo = p[3] ? p[3].toString().toUpperCase() : "";
+            const riscoGeral = p[21] ? p[21].toString().toUpperCase() : "";
+            const valorPA = p[12] ? p[12].toString().toUpperCase() : "";
+            const temRiscoPA = p[23] ? p[23].toString().toUpperCase() : ""; // Coluna W / Índice 23
+
+            // Filtro especial para Pressão Alta
+            const palavrasChavePA = ["PA", "PRESSAO", "PRESSÃO", "ALTA"];
+            if (palavrasChavePA.includes(termo)) {
+                return temRiscoPA === "SIM" || temRiscoPA === "X";
+            }
+
+            // Filtro global
+            const dadosBusca = `${nome} ${sexo} ${riscoGeral} ${valorPA} ${p[16]}`.toUpperCase();
+            return dadosBusca.includes(termo);
+        });
+        
+        renderizarTabela(filtrados);
+    }
+
+    function selecionarPacientePeloNome(nome) {
+        const paciente = basePacientes.find(p => p[0] === nome);
+        if (paciente) exibirDetalhes(paciente);
+    }
+
+    function formatBadge(label, valor) {
+        const check = (valor === "Sim" || valor === "X" || valor === "SIM");
+        return `<div class="info-item"><label>${label}</label><span class="badge ${check ? 'badge-sim' : ''}">${valor || 'Não'}</span></div>`;
+    }
+
+    function exibirDetalhes(p) {
+        // KPIs principais
+        document.getElementById("kpi_sexo").innerText = p[3] || "-";
+        document.getElementById("kpi_idade").innerText = p[2] || "-";
+        document.getElementById("kpi_id_risco").innerText = p[22] || "-";
+        document.getElementById("kpi_imc").innerText = p[16] || "-";
+        document.getElementById("kpi_rce").innerText = p[19] || "-";
+        document.getElementById("kpi_rcq").innerText = p[20] || "-";
+        document.getElementById("kpi_risco").innerText = p[21] || "-";
+
+        // Dados Médicos
+        document.getElementById("det_med").innerText = p[10] || "-";
+        document.getElementById("det_cont").innerText = p[11] || "-";
+        document.getElementById("det_pa").innerText = p[12] || "-";
+        document.getElementById("det_fc").innerText = p[13] || "-";
+        document.getElementById("det_peso").innerText = p[14] || "-";
+        document.getElementById("det_est").innerText = p[15] || "-";
+        document.getElementById("det_cin").innerText = p[17] || "-";
+        document.getElementById("det_qua").innerText = p[18] || "-";
+
+        // Badges Dinâmicos - Histórico
+        document.getElementById("info_historico").innerHTML = 
+            formatBadge("Hipertensão", p[4]) + formatBadge("Diabetes", p[5]) +
+            formatBadge("Colesterol", p[6]) + formatBadge("Tabagismo", p[7]);
+
+        // Badges Dinâmicos - Riscos (Colunas W em diante)
+        document.getElementById("info_riscos_rc").innerHTML = 
+            formatBadge("Idade Risco", p[22]) + formatBadge("PA Elevada", p[23]) +
+            formatBadge("Colesterol RC", p[24]) + formatBadge("Diabetes RC", p[26]) +
+            formatBadge("Tabagismo RC", p[27]) + formatBadge("HF DAC", p[28]) +
+            formatBadge("Sedentarismo", p[29]) + formatBadge("Apneia", p[32]);
+
+        // Badges Dinâmicos - Conduta
+        document.getElementById("info_conduta").innerHTML = 
+            formatBadge("Risco Baixo", p[33]) + formatBadge("Risco Mod.", p[34]) +
+            formatBadge("Risco Alto", p[35]) + formatBadge("Encaminhamento", p[38]);
+
+        window.scrollTo({ top: 150, behavior: 'smooth' });
+    }
+
+    window.onload = carregarDados;
+</script>
+</body>
+</html>
