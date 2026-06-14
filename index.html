@@ -317,7 +317,6 @@
 </head>
 <body>
 
-<!-- ===== ÁREA DE IMPRESSÃO INDIVIDUAL ===== -->
 <div id="print-area">
     <div class="print-header-brand">
         <h1>💚 VIDA EM EQUILÍBRIO</h1>
@@ -330,7 +329,6 @@
     </div>
 </div>
 
-<!-- ===== MODAL ALERTAS ===== -->
 <div class="modal-overlay" id="modal-alertas" onclick="fecharModalFora(event,'modal-alertas')">
     <div class="modal-box modal-alert">
         <button class="modal-close" onclick="fecharModal('modal-alertas')">×</button>
@@ -339,7 +337,6 @@
     </div>
 </div>
 
-<!-- ===== MODAL EDITAR PACIENTE ===== -->
 <div class="modal-overlay" id="modal-editar" onclick="fecharModalFora(event,'modal-editar')">
     <div class="modal-box modal-edit" style="max-width:720px;">
         <button class="modal-close" onclick="fecharModal('modal-editar')">×</button>
@@ -388,15 +385,14 @@
         </div>
 
         <div class="btn-row">
-            <button class="btn-p" onclick="salvarEdicaoPaciente()">💾 Salvar Alterações</button>
+            <button class="btn-p" onclick="salvarEdicaoPaciente()">💾 Salvar Dados</button>
             <button class="btn-s" onclick="fecharModal('modal-editar')">Cancelar</button>
         </div>
-        <div class="succ" id="succ-edit">✅ Dados atualizados com sucesso!</div>
+        <div class="succ" id="succ-edit">✅ Dados salvos com sucesso!</div>
         <div class="err-msg" id="err-edit">⚠️ Erro ao salvar. Verifique e tente novamente.</div>
     </div>
 </div>
 
-<!-- ===== MODAL CONFIRMAR EXCLUSÃO ===== -->
 <div class="modal-overlay" id="modal-confirma" onclick="fecharModalFora(event,'modal-confirma')">
     <div class="modal-box" style="max-width:400px;text-align:center;">
         <h2 style="color:#c62828;border-bottom-color:#ffcdd2;">🗑️ Confirmar Exclusão</h2>
@@ -435,7 +431,6 @@
 
 <div class="main">
 
-<!-- ============================================================ DASHBOARD -->
 <div class="tab-panel active" id="panel-dashboard">
 
     <div class="search-card">
@@ -485,7 +480,6 @@
 
     <div id="detail-area" style="display:none;">
 
-        <!-- Botões de ação do paciente -->
         <div class="btn-row" style="margin-bottom:14px;">
             <button class="btn-p" style="margin-top:0;" onclick="abrirEdicaoPaciente()">✏️ Editar Dados</button>
             <button class="btn-s" style="margin-top:0;" onclick="irParaProntuario()">📋 Ver Prontuário</button>
@@ -514,7 +508,6 @@
             </div>
         </div>
 
-        <!-- ÚLTIMO RESULTADO DE EXAMES -->
         <div id="secao-exames-resultado" style="display:none;">
             <div class="section" style="border-left:4px solid var(--green-mid);">
                 <h2>🔬 Último Resultado de Exames</h2>
@@ -554,7 +547,6 @@
     </div>
 </div>
 
-<!-- ============================================================ EXAMES -->
 <div class="tab-panel" id="panel-exames">
     <div class="section">
         <h2>🔬 Registrar Resultados de Exames</h2>
@@ -623,7 +615,6 @@
     </div>
 </div>
 
-<!-- ============================================================ PRONTUÁRIO MÉDICO -->
 <div class="tab-panel" id="panel-prontuario">
 
     <div class="pront-header">
@@ -634,7 +625,6 @@
         <button class="hbtn" style="background:rgba(255,255,255,0.2);" onclick="exportarHistCSV()">⬇ Exportar CSV</button>
     </div>
 
-    <!-- BUSCA DE PACIENTE -->
     <div class="section">
         <h2>🔍 Selecionar Paciente</h2>
         <div style="display:flex;gap:9px;align-items:center;flex-wrap:wrap;">
@@ -642,13 +632,13 @@
                 <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#888;pointer-events:none;">🔍</span>
                 <input type="text" id="buscaPront" placeholder="Buscar paciente pelo nome..." style="padding-left:36px;width:100%;padding-top:8px;padding-bottom:8px;border:2px solid var(--border);border-radius:10px;font-size:0.89rem;font-family:'DM Sans',sans-serif;background:var(--bg);" oninput="filtrarPront()">
             </div>
+            <button class="btn-p" style="margin-top:0; padding: 10px 20px;" onclick="abrirNovoPaciente()">➕ Novo Paciente</button>
         </div>
         <div style="max-height:160px;overflow-y:auto;border:1px solid var(--border);border-radius:10px;background:white;margin-top:9px;display:none;" id="listaPront">
             <table><tbody id="tabelaPront"></tbody></table>
         </div>
     </div>
 
-    <!-- INFO DO PACIENTE SELECIONADO -->
     <div class="pront-pac-info" id="pront-pac-info">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:9px;">
             <div>
@@ -664,7 +654,6 @@
         <div class="pront-pac-grid" id="pront-pac-grid"></div>
     </div>
 
-    <!-- FORMULÁRIO NOVO/EDITAR EXAME NO PRONTUÁRIO -->
     <div class="pront-form-section" id="pront-form-section">
         <div class="pront-form-header">
             <div>
@@ -719,7 +708,6 @@
         <div class="succ" id="succ-pront">✅ Exame salvo com sucesso!</div>
     </div>
 
-    <!-- TABELA DE HISTÓRICO -->
     <div class="section" id="pront-hist-section" style="display:none;">
         <h2>📋 Histórico de Exames do Paciente</h2>
         <div style="font-size:0.78rem;color:var(--muted);margin-bottom:11px;">Clique em um exame para editar ou excluir</div>
@@ -740,7 +728,6 @@
 
 </div>
 
-<!-- ============================================================ ESTATÍSTICAS -->
 <div class="tab-panel" id="panel-estatisticas">
     <div class="stats-header">
         <div>
@@ -823,28 +810,45 @@
         <div class="stats-sub-panel" id="sub-preditiva">
             <div class="stats-grid-2" style="margin-bottom:15px;">
                 <div class="stats-section">
-                    <h3>🔮 Calculadora de Risco Individual</h3>
+                    <h3>🔮 Simulador de Intervenção em Saúde</h3>
+                    <p style="font-size:0.75rem;color:var(--muted);margin-bottom:13px;">Estime o impacto populacional. Se aplicarmos ações corretivas, quantos pacientes saem do risco alto?</p>
                     <div class="fgrid" style="grid-template-columns:1fr 1fr;">
-                        <div class="form-group"><label>Idade</label><input type="number" id="pred_idade" placeholder="ex: 52" oninput="calcPred()"></div>
-                        <div class="form-group"><label>IMC</label><input type="number" step="0.1" id="pred_imc" placeholder="ex: 28.5" oninput="calcPred()"></div>
-                        <div class="form-group"><label>RCE</label><input type="number" step="0.01" id="pred_rce" placeholder="ex: 0.52" oninput="calcPred()"></div>
-                        <div class="form-group"><label>PA Elevada?</label><select id="pred_pa" onchange="calcPred()"><option value="0">Não</option><option value="1">Sim</option></select></div>
-                        <div class="form-group"><label>Tabagismo?</label><select id="pred_tab" onchange="calcPred()"><option value="0">Não</option><option value="1">Sim</option></select></div>
-                        <div class="form-group"><label>Diabetes?</label><select id="pred_dm" onchange="calcPred()"><option value="0">Não</option><option value="1">Sim</option></select></div>
+                        <div class="form-group">
+                            <label>Redução Média de Peso (kg)</label>
+                            <input type="number" id="sim_peso" placeholder="Ex: 3.0" oninput="simularIntervencao()">
+                        </div>
+                        <div class="form-group">
+                            <label>Controle de PA (% pacientes)</label>
+                            <select id="sim_pa" onchange="simularIntervencao()">
+                                <option value="0">Sem alteração</option>
+                                <option value="0.5">50% controlados</option>
+                                <option value="1">100% controlados</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Cessação de Tabagismo</label>
+                            <select id="sim_tab" onchange="simularIntervencao()">
+                                <option value="0">Sem alteração</option>
+                                <option value="0.5">Metade para de fumar</option>
+                                <option value="1">Todos param de fumar</option>
+                            </select>
+                        </div>
                     </div>
-                    <div id="pred-result" style="margin-top:13px;"></div>
+                    <div id="sim-result" style="margin-top:13px;"></div>
                 </div>
-                <div class="stats-section"><h3>📊 Distribuição de Probabilidade Predita</h3><div class="chart-wrap-tall"><canvas id="ch-pred-dist"></canvas></div></div>
+                <div class="stats-section">
+                    <h3>📊 Distribuição de Probabilidade Predita</h3>
+                    <div class="chart-wrap-tall"><canvas id="ch-pred-dist"></canvas></div>
+                </div>
             </div>
+            
             <div class="stats-section"><h3>⚠️ Pacientes com Maior Probabilidade de Risco Alto</h3><div id="top-risco-pred"></div></div>
             <div class="stats-section" style="margin-top:15px;"><h3>🔍 Insights Automáticos</h3><div id="insights-area"></div></div>
         </div>
     </div>
 </div>
 
-</div><!-- /main -->
-
-<script>
+</div><script>
 // ============================================================
 // CONFIGURAÇÃO
 // ============================================================
@@ -862,6 +866,7 @@ let chartsInit = {};
 let listaFiltrada = [];
 let historico = {};         // { [nome]: [{data,...}] }
 let excluirCallback = null; // callback para confirmar exclusão
+let modoEdicao = true;      // Controle de edição x criação
 
 // ============================================================
 // INIT
@@ -1125,7 +1130,7 @@ function mostrarDetalhes(p) {
     }).join('');
     document.getElementById("info_conduta").innerHTML = condHtml || '<div class="info-item"><label style="color:var(--muted)">Sem conduta registrada</label></div>';
 
-    // EXAMES DO HISTÓRICO (FIX PRINCIPAL)
+    // EXAMES DO HISTÓRICO
     atualizarSecaoExames(p[0]);
 }
 
@@ -1185,15 +1190,34 @@ function irParaProntuario() {
 }
 
 // ============================================================
-// EDITAR PACIENTE
+// NOVO E EDITAR PACIENTE
 // ============================================================
+function abrirNovoPaciente() {
+    modoEdicao = false;
+    pacAtual = null;
+    pacPront = null;
+    document.querySelector('.modal-edit h2').innerHTML = '➕ Cadastrar Novo Paciente';
+    document.getElementById('edit-pac-nome-info').innerText = 'Preencha os dados abaixo. Campos em branco serão ignorados.';
+    
+    // Limpa o formulário
+    const campos = ['ed_nome','ed_sexo','ed_idade','ed_has','ed_dm','ed_col','ed_tab','ed_alc','ed_hipot','ed_med','ed_cont','ed_pa','ed_fc','ed_peso','ed_est','ed_cin','ed_qua','ed_risco','ed_pa_elev','ed_sed'];
+    campos.forEach(id => document.getElementById(id).value = '');
+    
+    document.getElementById('succ-edit').classList.remove('vis');
+    document.getElementById('err-edit').classList.remove('vis');
+    abrirModal('modal-editar');
+}
+
 function abrirEdicaoPaciente() {
     const p = pacAtual || pacPront;
     if (!p) { alert('Selecione um paciente primeiro.'); return; }
-    document.getElementById('edit-pac-nome-info').innerText = `Editando: ${p[0]}`;
-    document.getElementById('ed_nome').value  = p[0]  || '';
-    document.getElementById('ed_sexo').value  = p[3]  || '';
-    document.getElementById('ed_idade').value = p[2]  || '';
+    modoEdicao = true;
+    document.querySelector('.modal-edit h2').innerHTML = '✏️ Editar Dados do Paciente';
+    document.getElementById('edit-pac-nome-info').innerText = `Editando: ${p[0]} (Apenas os campos alterados serão salvos na planilha)`;
+    
+    document.getElementById('ed_nome').value  = p[0] || '';
+    document.getElementById('ed_sexo').value  = p[3] || '';
+    document.getElementById('ed_idade').value = p[2] || '';
     document.getElementById('ed_has').value   = normSim(p[4]);
     document.getElementById('ed_dm').value    = normSim(p[5]);
     document.getElementById('ed_col').value   = normSim(p[6]);
@@ -1208,9 +1232,10 @@ function abrirEdicaoPaciente() {
     document.getElementById('ed_est').value   = p[15] || '';
     document.getElementById('ed_cin').value   = p[17] || '';
     document.getElementById('ed_qua').value   = p[18] || '';
-    document.getElementById('ed_risco').value  = p[21] || '';
+    document.getElementById('ed_risco').value = p[21] || '';
     document.getElementById('ed_pa_elev').value= normSim(p[23]);
     document.getElementById('ed_sed').value    = normSim(p[29]);
+    
     document.getElementById('succ-edit').classList.remove('vis');
     document.getElementById('err-edit').classList.remove('vis');
     abrirModal('modal-editar');
@@ -1224,74 +1249,114 @@ function normSim(v) {
 }
 
 async function salvarEdicaoPaciente() {
-    const p = pacAtual || pacPront;
-    if (!p) return;
-    const nomeOriginal = p[0];
-    const dados = {
-        acao: 'editarPaciente',
-        nomeOriginal,
-        nome:  document.getElementById('ed_nome').value,
-        sexo:  document.getElementById('ed_sexo').value,
-        idade: document.getElementById('ed_idade').value,
-        has:   document.getElementById('ed_has').value,
-        dm:    document.getElementById('ed_dm').value,
-        col:   document.getElementById('ed_col').value,
-        tab:   document.getElementById('ed_tab').value,
-        alc:   document.getElementById('ed_alc').value,
-        hipot: document.getElementById('ed_hipot').value,
-        med:   document.getElementById('ed_med').value,
-        cont:  document.getElementById('ed_cont').value,
-        pa:    document.getElementById('ed_pa').value,
-        fc:    document.getElementById('ed_fc').value,
-        peso:  document.getElementById('ed_peso').value,
-        est:   document.getElementById('ed_est').value,
-        cin:   document.getElementById('ed_cin').value,
-        qua:   document.getElementById('ed_qua').value,
-        risco: document.getElementById('ed_risco').value,
-        pa_elev: document.getElementById('ed_pa_elev').value,
-        sed:   document.getElementById('ed_sed').value,
+    const p = modoEdicao ? (pacAtual || pacPront) : null;
+    const nomeOriginal = modoEdicao && p ? p[0] : '';
+    
+    // Lógica inteligente: se for edição e o input estiver vazio, mantém o valor original do banco.
+    // Se for um novo paciente, o vazio vai vazio.
+    const obterValorOuManter = (id, idxPlanilha) => {
+        const valDigitado = document.getElementById(id).value;
+        if (modoEdicao && p && valDigitado === '') {
+            return p[idxPlanilha] || ''; 
+        }
+        return valDigitado;
     };
+
+    const dados = {
+        acao: modoEdicao ? 'editarPaciente' : 'adicionarPaciente',
+        nomeOriginal: nomeOriginal,
+        nome:  obterValorOuManter('ed_nome', 0),
+        sexo:  obterValorOuManter('ed_sexo', 3),
+        idade: obterValorOuManter('ed_idade', 2),
+        has:   obterValorOuManter('ed_has', 4),
+        dm:    obterValorOuManter('ed_dm', 5),
+        col:   obterValorOuManter('ed_col', 6),
+        tab:   obterValorOuManter('ed_tab', 7),
+        alc:   obterValorOuManter('ed_alc', 8),
+        hipot: obterValorOuManter('ed_hipot', 9),
+        med:   obterValorOuManter('ed_med', 10),
+        cont:  obterValorOuManter('ed_cont', 11),
+        pa:    obterValorOuManter('ed_pa', 12),
+        fc:    obterValorOuManter('ed_fc', 13),
+        peso:  obterValorOuManter('ed_peso', 14),
+        est:   obterValorOuManter('ed_est', 15),
+        cin:   obterValorOuManter('ed_cin', 17),
+        qua:   obterValorOuManter('ed_qua', 18),
+        risco: obterValorOuManter('ed_risco', 21),
+        pa_elev: obterValorOuManter('ed_pa_elev', 23),
+        sed:   obterValorOuManter('ed_sed', 29)
+    };
+
+    if (!dados.nome) {
+        alert("O Nome do Paciente é obrigatório.");
+        return;
+    }
+
     try {
         await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body: JSON.stringify(dados) });
-    } catch(e) {}
-    // Atualizar localmente
-    const idx = base.findIndex(x => x[0] === nomeOriginal);
-    if (idx !== -1) {
-        base[idx][0]  = dados.nome || nomeOriginal;
-        base[idx][3]  = dados.sexo;
-        base[idx][2]  = dados.idade;
-        base[idx][4]  = dados.has;
-        base[idx][5]  = dados.dm;
-        base[idx][6]  = dados.col;
-        base[idx][7]  = dados.tab;
-        base[idx][8]  = dados.alc;
-        base[idx][9]  = dados.hipot;
-        base[idx][10] = dados.med;
-        base[idx][11] = dados.cont;
-        base[idx][12] = dados.pa;
-        base[idx][13] = dados.fc;
-        base[idx][14] = dados.peso;
-        base[idx][15] = dados.est;
-        base[idx][17] = dados.cin;
-        base[idx][18] = dados.qua;
-        base[idx][21] = dados.risco;
-        base[idx][23] = dados.pa_elev;
-        base[idx][29] = dados.sed;
-        // Se nome mudou, migrar histórico
-        if (dados.nome && dados.nome !== nomeOriginal) {
-            if (historico[nomeOriginal]) { historico[dados.nome] = historico[nomeOriginal]; delete historico[nomeOriginal]; }
-        }
-        if (pacAtual && pacAtual[0] === nomeOriginal) pacAtual = base[idx];
-        if (pacPront && pacPront[0] === nomeOriginal) pacPront = base[idx];
+    } catch(e) {
+        console.error("Erro de conexão", e);
     }
+
+    // Atualização local na tela sem precisar recarregar
+    if (modoEdicao) {
+        const idx = base.findIndex(x => x[0] === nomeOriginal);
+        if (idx !== -1) {
+            base[idx][0]  = dados.nome;
+            base[idx][3]  = dados.sexo;
+            base[idx][2]  = dados.idade;
+            base[idx][4]  = dados.has;
+            base[idx][5]  = dados.dm;
+            base[idx][6]  = dados.col;
+            base[idx][7]  = dados.tab;
+            base[idx][8]  = dados.alc;
+            base[idx][9]  = dados.hipot;
+            base[idx][10] = dados.med;
+            base[idx][11] = dados.cont;
+            base[idx][12] = dados.pa;
+            base[idx][13] = dados.fc;
+            base[idx][14] = dados.peso;
+            base[idx][15] = dados.est;
+            base[idx][17] = dados.cin;
+            base[idx][18] = dados.qua;
+            base[idx][21] = dados.risco;
+            base[idx][23] = dados.pa_elev;
+            base[idx][29] = dados.sed;
+            
+            if (dados.nome !== nomeOriginal && historico[nomeOriginal]) {
+                historico[dados.nome] = historico[nomeOriginal]; 
+                delete historico[nomeOriginal]; 
+            }
+            if (pacAtual && pacAtual[0] === nomeOriginal) pacAtual = base[idx];
+            if (pacPront && pacPront[0] === nomeOriginal) pacPront = base[idx];
+        }
+    } else {
+        // Mock de inserção local para "Novo Paciente"
+        const novoArray = new Array(57).fill('');
+        novoArray[0] = dados.nome; novoArray[3] = dados.sexo; novoArray[2] = dados.idade;
+        novoArray[4] = dados.has; novoArray[5] = dados.dm; novoArray[6] = dados.col;
+        novoArray[7] = dados.tab; novoArray[8] = dados.alc; novoArray[9] = dados.hipot;
+        novoArray[10] = dados.med; novoArray[11] = dados.cont; novoArray[12] = dados.pa;
+        novoArray[13] = dados.fc; novoArray[14] = dados.peso; novoArray[15] = dados.est;
+        novoArray[17] = dados.cin; novoArray[18] = dados.qua; novoArray[21] = dados.risco;
+        novoArray[23] = dados.pa_elev; novoArray[29] = dados.sed;
+        base.push(novoArray);
+    }
+
     filtrar();
     verificarAlertas();
     if (pacAtual) mostrarDetalhes(pacAtual);
     if (pacPront) renderProntPacInfo(pacPront);
     statsCalc = false;
+    
+    document.getElementById('succ-edit').innerText = modoEdicao ? '✅ Dados atualizados com sucesso!' : '✅ Paciente adicionado com sucesso!';
     document.getElementById('succ-edit').classList.add('vis');
     document.getElementById('err-edit').classList.remove('vis');
-    setTimeout(() => document.getElementById('succ-edit').classList.remove('vis'), 4000);
+    
+    setTimeout(() => {
+        document.getElementById('succ-edit').classList.remove('vis');
+        if(!modoEdicao) fecharModal('modal-editar'); // Fecha se for novo
+    }, 2500);
 }
 
 // ============================================================
@@ -1753,7 +1818,7 @@ function escAttr(s) { return (s||'').replace(/"/g,'&quot;'); }
 function pct(a,b) { return b?+(a/b*100).toFixed(1):0; }
 
 // ============================================================
-// ESTATÍSTICAS
+// ESTATÍSTICAS & SIMULADOR
 // ============================================================
 function descStat(arr) {
     const a=arr.filter(x=>x!==null&&!isNaN(x));
@@ -1921,7 +1986,7 @@ function _calcStats(){
     makeChart('ch-roc',{type:'line',data:{labels:rocPts.map(p=>p.x.toFixed(2)),datasets:[{label:`ROC AUC=${auc}`,data:rocPts.map(p=>p.y),borderColor:'#c62828',backgroundColor:'rgba(198,40,40,0.1)',fill:true,pointRadius:0,tension:0.3},{label:'Aleatório',data:rocPts.map(p=>p.x),borderColor:'#aaa',borderDash:[5,5],pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{title:{display:true,text:'1 - Especificidade'}},y:{title:{display:true,text:'Sensibilidade'}}}}});
     makeChart('ch-odds',{type:'bar',data:{labels:features,datasets:[{label:'Odds Ratio',data:regModel.w.map(w=>+Math.exp(w).toFixed(3)),backgroundColor:regModel.w.map(w=>w>0?'rgba(198,40,40,0.7)':'rgba(0,105,92,0.7)')}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{title:{display:true,text:'OR'}}}}});
 
-    // Preditiva
+    // Preditiva / Simulação
     const bins10=Array(10).fill(0);preds.forEach(p=>{const b=Math.min(9,Math.floor(p*10));bins10[b]++;});
     makeChart('ch-pred-dist',{type:'bar',data:{labels:['0-10%','10-20%','20-30%','30-40%','40-50%','50-60%','60-70%','70-80%','80-90%','90-100%'],datasets:[{label:'n',data:bins10,backgroundColor:bins10.map((_,i)=>i<5?'rgba(0,105,92,0.6)':'rgba(198,40,40,0.6)')}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
     const topRisco=base.map((p,i)=>({nome:p[0],prob:preds[i],real:y[i]})).sort((a,b)=>b.prob-a.prob).slice(0,15);
@@ -1935,25 +2000,57 @@ function _calcStats(){
     insights.push({t:"ok",h:`🏆 Preditor principal: ${dominantF}`,b:`${dominantF} tem maior coeficiente/OR no modelo logístico — preditor mais forte de risco alto.`});
     if(+auc>0.7)insights.push({t:"ok",h:`✅ Modelo com boa discriminação (AUC=${auc})`,b:"O modelo logístico discrimina bem pacientes de risco alto. Pode ser usado como triagem complementar."});
     document.getElementById("insights-area").innerHTML=insights.map(({t,h,b})=>`<div class="pred-card ${t==='alert'?'alert-pred':''}"><h4>${h}</h4><p>${b}</p></div>`).join('');
-    calcPred();
+    
+    simularIntervencao();
 }
 
-function calcPred(){
-    if(!regModel)return;
-    const idade=parseFloat(document.getElementById("pred_idade").value)||0;
-    const imc=parseFloat(document.getElementById("pred_imc").value)||0;
-    const rce=parseFloat(document.getElementById("pred_rce").value)||0;
-    const pa=parseInt(document.getElementById("pred_pa").value)||0;
-    const tab=parseInt(document.getElementById("pred_tab").value)||0;
-    const dm=parseInt(document.getElementById("pred_dm").value)||0;
-    if(!idade&&!imc&&!rce){document.getElementById("pred-result").innerHTML='';return;}
-    const xi=[(idade-regModel.colMeans[0])/regModel.colStds[0],(imc-regModel.colMeans[1])/regModel.colStds[1],(rce-regModel.colMeans[2])/regModel.colStds[2],pa,tab,dm];
-    const z=xi.reduce((s,x,j)=>s+regModel.w[j]*x,regModel.b);
-    const prob=sigmoid(z);
-    const cls=prob>=0.7?'alto':prob>=0.4?'mod':'baixo';
-    const colors={alto:'#c62828',mod:'#e65100',baixo:'#2e7d32'};
-    const labels={alto:'⚠️ Risco Alto',mod:'🟠 Risco Moderado',baixo:'✅ Risco Baixo'};
-    document.getElementById("pred-result").innerHTML=`<div style="background:${colors[cls]}18;border:2px solid ${colors[cls]};border-radius:12px;padding:13px;text-align:center;"><div style="font-size:0.77rem;color:var(--muted);margin-bottom:5px;">Probabilidade Predita</div><div style="font-size:2rem;font-weight:800;color:${colors[cls]};font-family:'DM Mono',monospace;">${(prob*100).toFixed(1)}%</div><div style="font-size:0.93rem;font-weight:700;color:${colors[cls]};margin-top:3px;">${labels[cls]}</div><div class="prob-bar" style="margin-top:9px;"><div class="bar-wrap"><div class="bar-fill" style="width:${(prob*100).toFixed(1)}%;background:${colors[cls]}"></div></div></div></div>`;
+function simularIntervencao() {
+    if (!regModel || !base.length) return;
+    
+    const redPeso = parseFloat(document.getElementById("sim_peso").value) || 0;
+    const pctPA = parseFloat(document.getElementById("sim_pa").value) || 0;
+    const pctTab = parseFloat(document.getElementById("sim_tab").value) || 0;
+
+    let riscoAltoAtual = 0;
+    let riscoAltoSimulado = 0;
+
+    base.forEach(p => {
+        const idade = numOf(p, 2) || 0;
+        let imc = numOf(p, 16) || 0;
+        const rce = numOf(p, 19) || 0;
+        let paElev = isPos(p, 23) ? 1 : 0;
+        let tabag = isPos(p, 7) ? 1 : 0;
+        const dm = isPos(p, 5) ? 1 : 0;
+
+        // Baseline (Atual)
+        const xBase = [(idade-regModel.colMeans[0])/regModel.colStds[0], (imc-regModel.colMeans[1])/regModel.colStds[1], (rce-regModel.colMeans[2])/regModel.colStds[2], paElev, tabag, dm];
+        const probBase = sigmoid(xBase.reduce((s,x,j) => s + regModel.w[j]*x, regModel.b));
+        if (probBase >= 0.5) riscoAltoAtual++;
+
+        // Simulação
+        if (redPeso > 0) {
+            const pesoAtual = numOf(p, 14);
+            const alt = numOf(p, 15);
+            if (pesoAtual && alt) imc = Math.max(18, pesoAtual - redPeso) / (alt * alt);
+        }
+        if (paElev === 1 && Math.random() < pctPA) paElev = 0;
+        if (tabag === 1 && Math.random() < pctTab) tabag = 0;
+
+        const xSim = [(idade-regModel.colMeans[0])/regModel.colStds[0], (imc-regModel.colMeans[1])/regModel.colStds[1], (rce-regModel.colMeans[2])/regModel.colStds[2], paElev, tabag, dm];
+        const probSim = sigmoid(xSim.reduce((s,x,j) => s + regModel.w[j]*x, regModel.b));
+        if (probSim >= 0.5) riscoAltoSimulado++;
+    });
+
+    const reducao = riscoAltoAtual - riscoAltoSimulado;
+    const pctReducao = riscoAltoAtual > 0 ? ((reducao / riscoAltoAtual) * 100).toFixed(1) : 0;
+
+    document.getElementById("sim-result").innerHTML = `
+        <div style="background:#e8f5e9;border:2px solid #a5d6a7;border-radius:12px;padding:15px;text-align:center;">
+            <div style="font-size:0.77rem;color:#2e7d32;font-weight:700;text-transform:uppercase;">Impacto da Intervenção</div>
+            <div style="font-size:2.2rem;font-weight:800;color:#1b5e20;font-family:'DM Mono',monospace;margin:5px 0;">-${reducao} <span style="font-size:1.1rem;opacity:0.8;">pacientes (${pctReducao}%)</span></div>
+            <div style="font-size:0.85rem;color:#388e3c;">De ${riscoAltoAtual} para <strong>${riscoAltoSimulado}</strong> em risco alto</div>
+        </div>
+    `;
 }
 
 function showStatsSub(id,btn){
